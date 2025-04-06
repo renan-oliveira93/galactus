@@ -1,0 +1,55 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Child {
+  id              Int               @id @default(autoincrement())
+  name            String
+  age             Int
+  positiveTime    Int               @default(0)
+  negativeTime    Int               @default(0)
+  positiveActions PositiveAction[] @relation("ChildPositiveActions")
+  negativeActions NegativeAction[] @relation("ChildNegativeActions")
+  dailyRecords    DailyRecord[]
+}
+
+model PositiveAction {
+  id          Int             @id @default(autoincrement())
+  name        String
+  duration    Int
+  description String?
+  children    Child[] @relation("ChildPositiveActions")
+  dailyRecords DailyRecord[] @relation("PositiveActionDailyRecords")
+}
+
+model NegativeAction {
+  id          Int             @id @default(autoincrement())
+  name        String
+  duration    Int
+  description String?
+  children    Child[] @relation("ChildNegativeActions")
+  dailyRecords DailyRecord[] @relation("NegativeActionDailyRecords")
+}
+
+model Manager {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+}
+
+model DailyRecord {
+  id               Int            @id @default(autoincrement())
+  date             DateTime
+  childId          Int
+  child            Child          @relation(fields: [childId], references: [id])
+  positiveActionId Int?
+  positiveAction   PositiveAction? @relation("PositiveActionDailyRecords", fields: [positiveActionId], references: [id])
+  negativeActionId Int?
+  negativeAction   NegativeAction? @relation("NegativeActionDailyRecords", fields: [negativeActionId], references: [id])
+}

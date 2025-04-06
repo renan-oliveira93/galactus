@@ -1,0 +1,132 @@
+.actionRegister {
+    font-size: 16px;
+    text-align: center;
+    margin: 3rem auto;
+    max-width: 95vw;
+    background-color: var(--secondaryColor);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    
+    border-radius: 8px;
+    padding-bottom: 1rem;
+
+    p{
+        font-weight: bold;
+        color: var(--darkGray);
+        a{
+            color: #3e43e7;
+            text-decoration: none;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+    }
+  
+    &__title {
+      height: 40px;
+      line-height: 40px;
+      border-radius: 8px 8px 0 0;
+      border-bottom: 1px solid var(--primaryColor);
+      background-color: var(--secondaryColor);
+      color: var(--primaryColor);
+    }
+    
+    &__content {
+      border-bottom: 1px solid var(--primaryColor);
+      display: flex;
+  
+      &__btn {
+        background-color: var(--midGray);
+        color: var(--darkGray);
+        text-decoration: none;
+        border: none;
+        font-size: 20px;
+        font-weight: 700;
+        height: 40px;
+        line-height: 40px;
+        flex: 1;
+        cursor: pointer;
+  
+        &.active {
+          background-color: var(--secondaryColor);
+          color: var(--primaryColor);
+        }
+      }
+    }
+  
+    &__tabs {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+  
+      button {
+        background-color: var(--lightGray);
+        border: 1px solid var(--darkGray);
+        color: var(--darkGray);
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        cursor: pointer;
+        font-weight: 600;
+        border-radius: 4px;
+  
+        &.active {
+          background-color: var(--primaryColor);
+          color: var(--secondaryColor);
+        }
+      }
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1rem;
+  
+      label {
+        font-weight: bold;
+        color: var(--darkGray);
+      }
+  
+      select {
+        padding: 0.5rem;
+        font-size: 16px;
+        border: 1px solid var(--darkGray);
+        border-radius: 4px;
+        width: 60%;
+      }
+  
+      button[type="submit"] {
+        background-color: var(--primaryColor);
+        color: white;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+  
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+  
+      p {
+        font-size: 14px;
+        margin-top: 0.5rem;
+  
+        &.success {
+          color: green;
+        }
+  
+        &.error {
+          color: red;
+        }
+      }
+    }
+  }
+
+@media screen and (min-width: 601px) {
+  .actionRegister{
+    max-width: 50vw;
+  }
+}
+  
