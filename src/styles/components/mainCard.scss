@@ -1,0 +1,39 @@
+.mainCard{
+    font-size: 16px;
+    text-align: center;
+    margin: 3rem 1rem;
+    &__content{
+        display: flex;
+        &__btn{
+            background-color: var(--midGray);
+            color: var(--darkGray);
+            text-decoration: none;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            height: 40px;
+            line-height: 40px;
+            flex: 1;
+        &.active{
+            background-color: var(--secondaryColor);
+            color: var(--primaryColor);
+            }
+        }
+    }
+    &__time{
+        background-color: var(--secondaryColor);
+        color: var(--primaryColor);
+        font-size: 18px;
+        font-weight: 700;
+        // height: 40px;
+        line-height: 40px;
+    }
+}
+
+@media screen and (min-width: 601px) {
+    .mainCard{
+        max-width: 50vw;
+        margin: 3rem auto;
+    }
+    
+}

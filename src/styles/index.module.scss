@@ -1,0 +1,17 @@
+@use "./components/header.scss" as *;
+@use "./components/mainCard.scss" as *;
+@use "./components/sidebar.scss" as *;
+@use "./components/actions.scss" as *;
+@use "./components/reports.scss" as *;
+@use "./components/actionRegister.scss" as *;
+@use "./components/actionCreate.scss" as *;
+
+.main{
+    position: absolute;
+    min-height: 100vh; 
+    width: 100vw;
+}
+
+  
+
+  
