@@ -13,7 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const time = await totalTime(Number(childId));
       res.status(200).json(time);
     } catch (error) {
-      res.status(500).json({ error: 'Falha ao calcular tempo total', details: error.message }); 
+      const err = error as Error;
+      res.status(500).json({ error: 'Falha ao calcular tempo total', details: err.message }); 
     }
   } else {
     res.status(405).json({ error: 'Método não permitido' });

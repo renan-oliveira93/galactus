@@ -22,7 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(404).json({ error: 'No records found for this child' });
           }
         } catch (error) {
-          res.status(500).json({ error: 'Failed to fetch records for this child' });
+          const err = error as Error;
+          res.status(500).json({ error: 'Failed to fetch records for this child', details: err.message });
         }
       } else if (req.query.id) {
         try {
@@ -33,36 +34,38 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.status(404).json({ error: 'Record not found' });
           }
         } catch (error) {
-          res.status(500).json({ error: 'Failed to fetch record' });
+          const err = error as Error;
+          res.status(500).json({ error: 'Failed to fetch record', details: err.message });
         }
       } else {
         try {
           const records = await getDailyRecords();
           res.status(200).json(records);
         } catch (error) {
-          res.status(500).json({ error: 'Failed to fetch records' });
+          const err = error as Error;
+          res.status(500).json({ error: 'Failed to fetch records', details: err.message });
         }
       }
       break;
 
     case 'POST':
       if (req.body) {
-        // Registrar tempo de ação
         try {
           const { childId, actionId, isPositive, date } = req.body;
           const newRecord = await registerActionTime(childId, actionId, new Date(date), isPositive);
           res.status(201).json(newRecord);
         } catch (error) {
-          res.status(500).json({ error: 'Falha ao registrar tempo de ação', details: error.message });
+          const err = error as Error;
+          res.status(500).json({ error: 'Falha ao registrar tempo de ação', details: err.message });
         }
       } else {
-        // Criar um novo registro diário (se necessário para outros casos)
         try {
           const { date, childId, positiveActionId, negativeActionId } = req.body;
           const newRecord = await createDailyRecord(new Date(date), childId, positiveActionId, negativeActionId);
           res.status(201).json(newRecord);
         } catch (error) {
-          res.status(500).json({ error: 'Falha ao criar registro', details: error.message });
+          const err = error as Error;
+          res.status(500).json({ error: 'Falha ao criar registro', details: err.message });
         }
       }
       break;
@@ -73,7 +76,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const updatedRecord = await updateDailyRecord(id, new Date(date), childId, positiveActionId, negativeActionId, duration);
         res.status(200).json(updatedRecord);
       } catch (error) {
-        res.status(500).json({ error: 'Failed to update record' });
+        const err = error as Error;
+        res.status(500).json({ error: 'Failed to update record', details: err.message });
       }
       break;
 
@@ -83,7 +87,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const deletedRecord = await deleteDailyRecord(id);
         res.status(200).json(deletedRecord);
       } catch (error) {
-        res.status(500).json({ error: 'Failed to delete record' });
+        const err = error as Error;
+        res.status(500).json({ error: 'Failed to delete record', details: err.message });
       }
       break;
 

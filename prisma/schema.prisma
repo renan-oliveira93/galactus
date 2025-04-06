@@ -52,4 +52,5 @@ model DailyRecord {
   positiveAction   PositiveAction? @relation("PositiveActionDailyRecords", fields: [positiveActionId], references: [id])
   negativeActionId Int?
   negativeAction   NegativeAction? @relation("NegativeActionDailyRecords", fields: [negativeActionId], references: [id])
+  duration         Int?
 }
